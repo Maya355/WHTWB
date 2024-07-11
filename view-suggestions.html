@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Suggestions</title>
+    <link rel="stylesheet" href="suggestionstyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Suggestions</h1>
+        <div id="suggestions">
+            <!-- Suggestions will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const password = prompt('Enter the password to view suggestions:');
+            const correctPassword = '345$m'; // Set your password here
+            if (password === correctPassword) {
+                displaySuggestions();
+            } else {
+                alert('Incorrect password. You are not authorized to view suggestions.');
+                window.location.href = 'main.html'; // Redirect to home page or any other page
+            }
+        });
+
+        function displaySuggestions() {
+            const suggestions = JSON.parse(localStorage.getItem('suggestions')) || [];
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestions.forEach(suggestion => {
+                const suggestionElement = document.createElement('div');
+                suggestionElement.className = 'suggestion-box';
+
+                const suggestionText = document.createElement('p');
+                suggestionText.textContent = suggestion.text;
+                suggestionElement.appendChild(suggestionText);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteSuggestion(suggestion.id);
+
+                suggestionElement.appendChild(deleteButton);
+                suggestionsContainer.appendChild(suggestionElement);
+            });
+        }
+
+        function deleteSuggestion(id) {
+            const password = prompt('Enter the password to delete this suggestion:');
+            const correctPassword = '345$m'; // Set your password here
+            if (password === correctPassword) {
+                let suggestions = JSON.parse(localStorage.getItem('suggestions')) || [];
+                suggestions = suggestions.filter(suggestion => suggestion.id !== id);
+                localStorage.setItem('suggestions', JSON.stringify(suggestions));
+                location.reload(); // Reload the page to update the suggestions list
+            } else {
+                alert('Incorrect password. You are not authorized to delete this suggestion.');
+            }
+        }
+    </script>
+</body>
+</html>

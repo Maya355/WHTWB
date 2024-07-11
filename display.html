@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Messages</title>
+    <link rel="stylesheet" href="StylesWriting.css">
+</head>
+<body>
+    <div class="container">
+        <h1>𖤓°⋆.*:･Others Experiences𖤓°⋆.*:･</h1>
+        <div id="messages">
+            <!-- Messages will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            const messageContainer = document.getElementById('messages');
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'message-box';
+
+                const messageText = document.createElement('p');
+                messageText.textContent = message.text;
+                messageElement.appendChild(messageText);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = () => deleteMessage(message.id);
+
+                messageElement.appendChild(deleteButton);
+                messageContainer.appendChild(messageElement);
+            });
+        });
+
+        function deleteMessage(id) {
+            const password = prompt('Enter the password to delete this message:');
+            const correctPassword = '345$m'; // Set your password here
+            if (password === correctPassword) {
+                let messages = JSON.parse(localStorage.getItem('messages')) || [];
+                messages = messages.filter(message => message.id !== id);
+                localStorage.setItem('messages', JSON.stringify(messages));
+                location.reload(); // Reload the page to update the message list
+            } else {
+                alert('Incorrect password. You are not authorized to delete this message.');
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<nav class="navbar">
+    <div class="navbar__container">
+        <a href="main.html" id="navbar__logo"><i class="fas fa-earth"></i>What Has The World Become?</a>
+        <div class="navbar__toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="display.html" class="navbar__links">
+                    Read Others
+                </a>
+            </li>
+            <li class="navbar__item">
+                <a href="Suggestions.html" class="navbar__links">
+                    Suggestions
+                </a>
+            </li>
+            <li class="navbar__btn">
+                <a href="write.html" class="button">
+                    Create Your Own
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script src="app.js"></script>
