@@ -305,3 +305,45 @@ button:hover {
         transform: translateY(-8px) rotate(-45deg);
     }
 }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.item {
+    flex: 1 1 calc(33% - 30px);
+    margin: 15px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word; /* Ensure words break properly */
+    overflow-wrap: break-word; /* Ensure words break properly */
+}
+
+@media (max-width: 1024px) {
+    .item {
+        flex: 1 1 calc(50% - 30px);
+    }
+}
+
+@media (max-width: 600px) {
+    .item {
+        flex: 1 1 100%;
+        margin: 5px 0;
+    }
+
+    .item {
+        font-size: 1rem; /* Adjust font size for readability */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
+
